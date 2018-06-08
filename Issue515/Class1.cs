@@ -14,6 +14,9 @@ namespace Issue515
         [AuthorizeAttribute]
         public void Whatever()
         { }
+
+        public void Nobody()
+        { }
     }
 
     public class AuthorizeAttribute : Attribute
@@ -50,12 +53,14 @@ namespace Issue515
             }
         }
 
-    
 
-   
+
+      
         [TestCaseSource(nameof(AllControllerMethods))]
         public void HasAuthorizeAttributes(MethodInfo methodInfo)
         {
+            if (methodInfo.Name == nameof(HasAuthorizeAttributes))
+                return;
             var authorizeAttribute = methodInfo.GetCustomAttributes(typeof(AuthorizeAttribute), false);
             var allowAnonymousAttribute = methodInfo.GetCustomAttributes(typeof(AllowAnonymousAttribute), false);
 
