@@ -14,7 +14,8 @@ namespace Issue515
         [AuthorizeAttribute]
         public void Whatever()
         { }
-
+        
+        [AllowAnonymousAttribute]
         public void Nobody()
         { }
     }
